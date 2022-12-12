@@ -500,7 +500,7 @@ export const ProductPage = () => {
                         src={elem.img_url_1 || elem.img_url_2}
                         // alt="https://www.insticc.org/node/TechnicalProgram/56e7352809eb881d8c5546a9bbf8406e.png"
 
-                        style={{ width: "100%", height: "100%" }}
+                        style={{ width: "90%", height: "90%" }}
                       />
                     </div>
                     <div
@@ -542,7 +542,16 @@ export const ProductPage = () => {
                     </div>
                   </div>
                   <div className="TRP">
-                    <p style={{ margin: "0px",fontFamily:"lato regular,Helvetica,Arial,sans-serif" }}>{elem.name.slice(0, 30)}...</p>
+                    <p
+                      style={{
+                        margin: "0px",
+                        fontFamily: "lato regular,Helvetica,Arial,sans-serif",
+                        fontSize: "16px",
+                        fontWeight: "700",
+                      }}
+                    >
+                      {elem.name.slice(0, 20)}
+                    </p>
                     <div
                       style={{
                         display: "flex",
@@ -552,7 +561,7 @@ export const ProductPage = () => {
                         margin: "auto",
                       }}
                     >
-                      <Stack spacing={0.5} alignItems='inherit'>
+                      <Stack spacing={0.5} alignItems="inherit">
                         <Rating
                           name="size-small"
                           // name="half-rating-read"
@@ -565,7 +574,12 @@ export const ProductPage = () => {
                     </div>
                     <h3
                       name="price"
-                      style={{ marginTop: "0px", textAlign: "center",fontSize:"19px" ,fontWeight: "700" }}
+                      style={{
+                        marginTop: "0px",
+                        textAlign: "center",
+                        fontSize: "19px",
+                        fontWeight: "700",
+                      }}
                     >
                       $ {elem.mrp}
                     </h3>
@@ -574,13 +588,13 @@ export const ProductPage = () => {
                     className="QB"
                     style={{
                       marginBottom: "0",
-                      height: "10%",
+                      height: "1%",
                     }}
                   >
                     <button
                       style={{
                         padding: "5px",
-                        fontSize: "18px",
+                        fontSize: "16px",
                       }}
                       onClick={() => {
                         getData();
