@@ -19,11 +19,15 @@
   display: flex;
   width: 100%;
   align-items: center;
+  justify-content: center;
+  margin-bottom: 1%;
+  margin-top: 1%;
   /* justify-content: space-between; */
 }
 .app_logo {
-  margin: 20px;
-  width: 15%;
+  /* margin: 2px; */
+  margin-bottom: 15px;
+  /* width: 15%; */
 }
 .searchBar {
   display: flex;
@@ -46,8 +50,8 @@
   border: 1px solid black;
   border-right: none;
   width: 55%;
-  padding: 10px 20px;
-  font-size: 15px;
+  padding: 10px 18px;
+  font-size: 13px;
   outline: none;
   border-radius: 5px 0 0 5px;
 }

@@ -1,3 +1,6 @@
+*{
+  /* box-sizing: border-box; */
+}
 .sort {
   /* border: 1px solid green; */
   padding: 0 0 5% 8%;

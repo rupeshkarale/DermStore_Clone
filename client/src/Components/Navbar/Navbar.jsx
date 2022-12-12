@@ -207,7 +207,8 @@ export const Navbar = () => {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  alignItems: "center",
+                  alignItems: "baseline",
+                    
                   width: "80px",
                   gap: "15px",
                   fontSize: "14px",
@@ -234,7 +235,7 @@ export const Navbar = () => {
                     ></path>
                   </svg>
                 </div>
-                <p style={{ marginTop: "12px" }}>Account</p>
+                <p style={{  }}>Account</p>
               </Link>
               {showLoginDrop ? (
                 isAuth ? (
