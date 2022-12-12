@@ -205,7 +205,7 @@ export const ProductPage = () => {
             <br />
           </div>
           <div>
-            <h4 style={{ fontSize: "20px", marginTop: "10px" }}>
+            <h4 style={{ fontSize: "20px", marginTop: "10px", fontFamily: "lato regular,Helvetica,Arial,sans-serif" }}>
               Item Category
             </h4>
             <hr />
@@ -493,7 +493,7 @@ export const ProductPage = () => {
           <div className="PRlist">
             {items.map((elem, index) => {
               return (
-                <div key={index} style={{ width: "99%" }}>
+                <div key={index} style={{ width: "80%" }}>
                   <div className="IW">
                     <div className="ImG">
                       <img
@@ -542,28 +542,30 @@ export const ProductPage = () => {
                     </div>
                   </div>
                   <div className="TRP">
-                    <p>{elem.name.slice(0, 30)}...</p>
+                    <p style={{ margin: "0px",fontFamily:"lato regular,Helvetica,Arial,sans-serif" }}>{elem.name.slice(0, 30)}...</p>
                     <div
                       style={{
                         display: "flex",
                         alignItems: "center",
                         width: "100px",
+                        justifyContent: "center",
                         margin: "auto",
                       }}
                     >
-                      <Stack spacing={0.5}>
+                      <Stack spacing={0.5} alignItems='inherit'>
                         <Rating
-                          name="half-rating-read"
+                          name="size-small"
+                          // name="half-rating-read"
                           defaultValue={elem.rating}
                           precision={0.5}
                           readOnly
                         />
                       </Stack>
-                      <h3>{elem.rating}</h3>
+                      {/* <h5>{elem.rating}</h5> */}
                     </div>
                     <h3
                       name="price"
-                      style={{ marginTop: "0px", textAlign: "center" }}
+                      style={{ marginTop: "0px", textAlign: "center",fontSize:"19px" ,fontWeight: "700" }}
                     >
                       $ {elem.mrp}
                     </h3>
