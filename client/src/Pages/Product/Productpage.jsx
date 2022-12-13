@@ -205,10 +205,21 @@ export const ProductPage = () => {
             <br />
           </div>
           <div>
-            <h4 style={{ fontSize: "20px", marginTop: "10px", fontFamily: "lato regular,Helvetica,Arial,sans-serif" }}>
+            <h5
+              style={{
+                fontSize: "20px",
+                marginTop: "10px",
+                margin: "0px",
+                // fontFamily: "lato regular,Helvetica,Arial,sans-serif",
+                textAlign: "left",
+                fontFamily: "lato regular,Helvetica,Arial,sans-serif",
+                lineHeight: 1.5,
+                fontWeight: 600,
+              }}
+            >
               Item Category
-            </h4>
-            <hr />
+            </h5>
+            <hr style={{ margin: "5px" }} />
             <div className="Brands">
               {category.map((e, index) => {
                 return (
@@ -224,9 +235,20 @@ export const ProductPage = () => {
             </div>
           </div>
           <div>
-            <h4 style={{ fontSize: "20px", marginTop: "10px" }}>
+            <h5
+              style={{
+                fontSize: "20px",
+                marginTop: "10px",
+                margin: "0px",
+                // fontFamily: "lato regular,Helvetica,Arial,sans-serif",
+                textAlign: "left",
+                fontFamily: "lato regular,Helvetica,Arial,sans-serif",
+                lineHeight: 1.5,
+                fontWeight: 600,
+              }}
+            >
               Makeup Category
-            </h4>
+            </h5>
             <hr />
             <div
               style={
@@ -250,9 +272,20 @@ export const ProductPage = () => {
             </div>
           </div>
           <div>
-            <h4 style={{ fontSize: "20px", marginTop: "10px" }}>
+            <h5
+              style={{
+                fontSize: "20px",
+                marginTop: "10px",
+                margin: "0px",
+                // fontFamily: "lato regular,Helvetica,Arial,sans-serif",
+                textAlign: "left",
+                fontFamily: "lato regular,Helvetica,Arial,sans-serif",
+                lineHeight: 1.5,
+                fontWeight: 600,
+              }}
+            >
               Makeup Product Type
-            </h4>
+            </h5>
             <hr />
             <div>
               {makeupPr.map((e, index) => {

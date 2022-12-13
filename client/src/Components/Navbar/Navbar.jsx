@@ -123,8 +123,10 @@ export const Navbar = () => {
                   width="200"
                   color="#222222"
                   viewBox="0 0 259 64"
-                  className="headerLogo"
+                  // className="headerLogo"
+                  className="dermstorelogo"
                 >
+                  {/* <img src="http://www.w3.org/2000/svg" alt="" /> */}
                   <g fill="currentColor" fillRule="evenodd">
                     <g fill="currentColor" fillRule="nonzero">
                       <g>
@@ -235,7 +237,7 @@ export const Navbar = () => {
                     ></path>
                   </svg>
                 </div>
-                <p style={{  }}>Account</p>
+                <p style={{ color: "black", margin:'0px' }}>Account</p>
               </Link>
               {showLoginDrop ? (
                 isAuth ? (
@@ -296,6 +298,7 @@ export const Navbar = () => {
                 }}
               >
                 <div className="cart_svg_div">
+                  
                   <svg
                     className="UserDropDowns_icon_06"
                     width="22"
@@ -304,7 +307,7 @@ export const Navbar = () => {
                     stroke="#2F3337"
                     fill="#2F3337"
                   >
-                    <title>Cart Empty</title>
+                    <title style={{color:"black"}} >Cart Empty</title>
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
