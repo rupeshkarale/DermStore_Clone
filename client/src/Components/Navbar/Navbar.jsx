@@ -763,7 +763,7 @@ export const Navbar = () => {
                 alt=""
               />
             </li>
-            <li>Free US shipping over $50</li>
+            <li>Free shipping over $50</li>
           </ul>
           <ul
             style={{
@@ -780,7 +780,7 @@ export const Navbar = () => {
                 alt=""
               />
             </li>
-            <li>New Customers save 15% </li>
+            <li>New Customers 15%</li>
           </ul>
           <ul
             style={{
