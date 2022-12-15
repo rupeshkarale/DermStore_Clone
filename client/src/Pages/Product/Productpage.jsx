@@ -1,6 +1,6 @@
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-
+import { Skeleton } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
@@ -30,6 +30,7 @@ export const ProductPage = () => {
   const [savings, setSavings] = useState([]);
   const [aReviews, setAReviews] = useState([]);
   const [like, setItemlike] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [Token, setToken] = useState("");
   const { isAuth } = useContext(AuthContext);
 
@@ -90,19 +91,23 @@ export const ProductPage = () => {
   }, []);
 
   useEffect(() => {
+    setLoading(() => true);
     getData();
   }, []);
 
   const dispatch = useDispatch();
 
   async function getData() {
-    const data = await fetch(
+    const res = await fetch(
       "https://dermstoreproducts.cyclic.app/dermproducts"
-    ).then((d) => d.json());
+    )
+    const data = await res.json();
     setItems(data);
+    setLoading(() => false);
+
     //  console.log(data);
   }
-
+  const Skeletondiv = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12];
   const Sort = (e) => {
     if (e.target.value == "LTH") {
       const d = [...items].sort((a, b) => {
@@ -153,7 +158,7 @@ export const ProductPage = () => {
   // };
   const SetToReduce = () => {
     axios
-      .get(` https://dermstore-server-ayush.herokuapp.com/items/${Token}`)
+      .get(` https://dermstore.cyclic.app/items/${Token}`)
       .then(({ data }) => {
         dispatch(fetchCartData(data));
         dispatch(GetCartCount(data[0].cartItems.length));
@@ -524,133 +529,167 @@ export const ProductPage = () => {
             </select>
           </div>
           <div className="PRlist">
-            {items.map((elem, index) => {
-              return (
-                <div key={index} style={{ width: "80%" }}>
-                  <div className="IW">
-                    <div className="ImG">
-                      <img
-                        src={elem.img_url_1 || elem.img_url_2}
-                        // alt="https://www.insticc.org/node/TechnicalProgram/56e7352809eb881d8c5546a9bbf8406e.png"
-
-                        style={{ width: "90%", height: "90%" }}
+            {loading ? (
+              <div style={{ display:"grid" ,gridTemplateColumns: "1fr 1fr 1fr 1fr",gap:"40px" }} >
+                {Skeletondiv.map(() => {
+                  return (
+                    <div>
+                      <Skeleton
+                        variant="text"
+                        width={210}
+                        sx={{ fontSize: "1rem" }}
                       />
+                      {/* For other variants, adjust the size with `width` and `height` */}
+                      <Skeleton
+                        variant="circular"
+                        margin="auto"
+                        width={60}
+                        height={60}
+                      />
+
+                      {/* <Skeleton variant="rectangular" width={210} height={60} /> */}
+                      <Skeleton
+                        variant="rounded"
+                        width={210}
+                        marginBottom="20px"
+                        height={30}
+                      />
+                      <br />
+                      <Skeleton variant="rounded" width={210} height={60} />
                     </div>
-                    <div
-                      onClick={(e) => {
-                        // this.style.color="green";
-                        alert("Added to wishlist");
-                        getData();
-                        const data = elem;
-                        console.log(data.item_like);
-                        fetch(
-                          " https://dermstore-server-ayush.herokuapp.com/wishlist",
-                          {
-                            method: "POST",
-                            headers: {
-                              "content-type": "application/json",
-                            },
-                            body: JSON.stringify(data),
-                          }
-                        );
-                      }}
-                      className="wishlist"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="30"
-                        height="30"
-                        fill="currentColor"
-                        className="bi bi-heart-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+                  );
+                })}
+                
+              </div>
+            ) : (
+              items.map((elem, index) => {
+                return (
+                  <div key={index} style={{ width: "80%" }}>
+                    <div className="IW">
+                      <div className="ImG">
+                        <img
+                          src={elem.img_url_1 || elem.img_url_2}
+                          // alt="https://www.insticc.org/node/TechnicalProgram/56e7352809eb881d8c5546a9bbf8406e.png"
+
+                          style={{ width: "90%", height: "90%" }}
                         />
-                        {/* <path fill-rule="evenodd" 
+                      </div>
+                      <div
+                        onClick={(e) => {
+                          // this.style.color="green";
+                          alert("Added to wishlist");
+                          getData();
+                          const data = elem;
+                          console.log(data.item_like);
+                          fetch(
+                            " https://dermstore-server-ayush.herokuapp.com/wishlist",
+                            {
+                              method: "POST",
+                              headers: {
+                                "content-type": "application/json",
+                              },
+                              body: JSON.stringify(data),
+                            }
+                          );
+                        }}
+                        className="wishlist"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="30"
+                          height="30"
+                          fill="currentColor"
+                          className="bi bi-heart-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+                          />
+                          {/* <path fill-rule="evenodd" 
 											 		d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" 
 													fill="red"></path>  */}
-                      </svg>
+                        </svg>
+                      </div>
                     </div>
-                  </div>
-                  <div className="TRP">
-                    <p
-                      style={{
-                        margin: "0px",
-                        fontFamily: "lato regular,Helvetica,Arial,sans-serif",
-                        fontSize: "16px",
-                        fontWeight: "700",
-                      }}
-                    >
-                      {elem.name.slice(0, 20)}
-                    </p>
+                    <div className="TRP">
+                      <p
+                        style={{
+                          margin: "0px",
+                          fontFamily: "lato regular,Helvetica,Arial,sans-serif",
+                          fontSize: "16px",
+                          fontWeight: "700",
+                        }}
+                      >
+                        {elem.name.slice(0, 20)}
+                      </p>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          width: "100px",
+                          justifyContent: "center",
+                          margin: "auto",
+                        }}
+                      >
+                        <Stack spacing={0.5} alignItems="inherit">
+                          <Rating
+                            name="size-small"
+                            // name="half-rating-read"
+                            defaultValue={elem.rating}
+                            precision={0.5}
+                            readOnly
+                          />
+                        </Stack>
+                        {/* <h5>{elem.rating}</h5> */}
+                      </div>
+                      <h3
+                        name="price"
+                        style={{
+                          marginTop: "0px",
+                          textAlign: "center",
+                          fontSize: "19px",
+                          fontWeight: "700",
+                        }}
+                      >
+                        $ {elem.mrp}
+                      </h3>
+                    </div>
                     <div
+                      className="QB"
                       style={{
-                        display: "flex",
-                        alignItems: "center",
-                        width: "100px",
-                        justifyContent: "center",
-                        margin: "auto",
+                        marginBottom: "0",
+                        height: "1%",
                       }}
                     >
-                      <Stack spacing={0.5} alignItems="inherit">
-                        <Rating
-                          name="size-small"
-                          // name="half-rating-read"
-                          defaultValue={elem.rating}
-                          precision={0.5}
-                          readOnly
-                        />
-                      </Stack>
-                      {/* <h5>{elem.rating}</h5> */}
+                      <button
+                        style={{
+                          padding: "5px",
+                          fontSize: "16px",
+                        }}
+                        onClick={() => {
+                          getData();
+                          const data = elem;
+                          //send data to cart
+                          sendToCart(elem);
+                          // fetch("https://ayush05.herokuapp.com/dermcart", {
+                          //   method: "POST",
+                          //   headers: {
+                          //     "content-type": "application/json",
+                          //   },
+                          //   body: JSON.stringify(data),
+                          // });
+                          SetToReduce();
+                        }}
+                        className="ATC"
+                      >
+                        Add To Cart
+                      </button>
                     </div>
-                    <h3
-                      name="price"
-                      style={{
-                        marginTop: "0px",
-                        textAlign: "center",
-                        fontSize: "19px",
-                        fontWeight: "700",
-                      }}
-                    >
-                      $ {elem.mrp}
-                    </h3>
                   </div>
-                  <div
-                    className="QB"
-                    style={{
-                      marginBottom: "0",
-                      height: "1%",
-                    }}
-                  >
-                    <button
-                      style={{
-                        padding: "5px",
-                        fontSize: "16px",
-                      }}
-                      onClick={() => {
-                        getData();
-                        const data = elem;
-                        //send data to cart
-                        sendToCart(elem);
-                        // fetch("https://ayush05.herokuapp.com/dermcart", {
-                        //   method: "POST",
-                        //   headers: {
-                        //     "content-type": "application/json",
-                        //   },
-                        //   body: JSON.stringify(data),
-                        // });
-                        SetToReduce();
-                      }}
-                      className="ATC"
-                    >
-                      Add To Cart
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         </div>
       </div>
