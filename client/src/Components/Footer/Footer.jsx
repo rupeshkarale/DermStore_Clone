@@ -229,3 +229,4 @@ export const Footer = () => {
     </section>
   );
 };
+
